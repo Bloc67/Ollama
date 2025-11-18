@@ -333,6 +333,9 @@ DO NOT include any notes, commentary, thinking process, or formatting.
 DO NOT include the index number in your response.
 DO NOT use any prefixes like "Translation:" or "**" before the subtitle.
 
+When using the term "old bill", its meaning is the local police.
+DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
+
 Preserve the original meaning, formatting, and line breaks as accurately as possible.
 Consider the context provided to ensure natural dialogue flow.
 
@@ -594,8 +597,8 @@ class SubtitleTranslator:
                 print("❌ 'ollama serve' is not running.")
                 print("➡️  Please start it manually by running: `ollama serve`")
                 sys.exit(1)
-            else:
-                print("✅ 'ollama serve' is already running.")
+#            else:
+#                print("✅ 'ollama serve' is already running.")
         except Exception as e:
             print(f"⚠️ Error checking 'ollama serve': {e}")
             sys.exit(1)
@@ -616,19 +619,19 @@ def create_parser() -> argparse.ArgumentParser:
     
     parser.add_argument(
         '-i', '--input-language', 
-        default='Auto', 
+        default='English', 
         help='Source language (Auto for auto-detect)'
     )
     
     parser.add_argument(
         '-o', '--output-language', 
-        default='English', 
+        default='Norwegian', 
         help='Target language'
     )
     
     parser.add_argument(
         '-m', '--model', 
-        default='vanilj/gemma-2-ataraxy-9b:IQ2_M', 
+        default='gemma3:27b', 
         help='Ollama model to use'
     )
     
@@ -640,7 +643,7 @@ def create_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '-b', '--batch-size', 
         type=int, 
-        default=5,
+        default=1,
         help='Number of subtitles to translate at once'
     )
     
