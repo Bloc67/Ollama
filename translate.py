@@ -237,6 +237,11 @@ DO NOT include any notes, commentary, or thinking process in your response.
 DO NOT use any prefixes like "Translation:" or "**" before the subtitles.
 Each subtitle should only be preceded by its index number in square brackets.
 
+When using the term "old bill", its meaning is the local police.
+DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
+
+The words are being spoken in a cockney dialect East London. Consider that when translating.
+
 Preserve the original meaning, formatting, and line breaks as accurately as possible.
 These subtitles are sequential dialogue from the same content, so maintain consistency in:
 - Character names and how they refer to each other
@@ -336,6 +341,8 @@ DO NOT use any prefixes like "Translation:" or "**" before the subtitle.
 When using the term "old bill", its meaning is the local police.
 DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
 
+The words are being spoken in a cockney dialect East London. Consider that when translating.
+
 Preserve the original meaning, formatting, and line breaks as accurately as possible.
 Consider the context provided to ensure natural dialogue flow.
 
@@ -415,6 +422,11 @@ Each subtitle should only be preceded by its index number in square brackets.
 Focus on maintaining consistency in terminology, character references, and narrative flow.
 Preserve the original meaning and formatting, but make the dialogue flow more naturally.
 Do not change the subtitle index numbers in square brackets.
+
+When using the term "old bill", its meaning is the local police.
+DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
+
+The words are being spoken in a cockney dialect East London. Consider that when translating.
 
 TRANSLATED SUBTITLES:
 {{text}}
@@ -696,16 +708,16 @@ async def main_async():
     translator = SubtitleTranslator()
     translator.ensure_ollama_serve()
 
-    print(f"Parsing subtitle file: {args.file}")
+    #print(f"Parsing subtitle file: {args.file}")
     subtitles = translator.parser.parse_srt(args.file)
-    print(f"Found {len(subtitles)} subtitle entries")
+    #print(f"Found {len(subtitles)} subtitle entries")
     
-    print(f"Translating from {args.input_language} to {args.output_language} using {args.model}...")
-    print(f"Context-enhanced translation enabled with {'individual' if args.individual else 'batch'} processing")
-    if args.meta:
-        print(f"Content metadata: {args.meta}")
-    if not args.skip_consistency:
-        print("Consistency improvement pass will be performed after initial translation")
+    #print(f"Translating from {args.input_language} to {args.output_language} using {args.model}...")
+    #print(f"Context-enhanced translation enabled with {'individual' if args.individual else 'batch'} processing")
+    #if args.meta:
+    #    print(f"Content metadata: {args.meta}")
+    #if not args.skip_consistency:
+    #    print("Consistency improvement pass will be performed after initial translation")
     
     # Process all subtitles
     try:
@@ -723,7 +735,7 @@ async def main_async():
         
         # Write the translated subtitles to the output file
         translator.parser.write_srt(translated_subtitles, args.output_file)
-        print(f"Translation complete! Output saved to: {args.output_file}")
+        #print(f"Translation complete! Output saved to: {args.output_file}")
     
     except Exception as e:
         print(f"Error during translation: {e}")

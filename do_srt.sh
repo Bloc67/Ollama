@@ -17,7 +17,7 @@ COUNT=0
 SECONDS=0
 DATO_START=$(date '+%H:%M')
 for FIL in *.en.srt; do
-    python translate.py "$FIL"
+    python translate.py "$FIL" --skip-consistency
     wait
     let "COUNT++"
     echo "${GREEN}------------------------------------------------${END}"
