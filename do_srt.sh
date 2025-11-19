@@ -17,7 +17,6 @@ COUNT=0
 SECONDS=0
 DATO_START=$(date '+%H:%M')
 for FIL in *.en.srt; do
-    python translate.py "$FIL" --skip-consistency
     python3 translate.py "$FIL" --skip-consistency -b 5 -m gemma3:12b
     wait
     let "COUNT++"
