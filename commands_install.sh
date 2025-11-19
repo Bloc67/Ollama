@@ -1,28 +1,39 @@
+#!/bin/bash
+
+RED=$'\e[1;31m'
+GREEN=$'\e[1;32m'
+YELLOW=$'\e[1;33m'
+BLUE=$'\e[1;34m'
+MAGENTA=$'\e[1;35m'
+CYAN=$'\e[1;36m'
+END=$'\e[0m'
+BOLD=$'\033[1m'
+ITALIC=$'\033[3m'
+UNDERLINE=$'\033[4m'
+
 sudo apt update
 sudo apt upgrade
-echo "Installing micro.."
+echo "${CYAN}Installing micro.."
 sudo apt install micro
-echo "Copying micro to nano"
+echo "${CYAN}Copying micro to nano"
 sudo cp /bin/micro /bin/nano
 
-echo "Fetching ollama.."
+echo "${GREEN}Fetching ollama..${END}"
 curl -fsSL https://ollama.com/install.sh | sh
 systemctl status ollama
-echo "Ollama pulling 27b.."
-ollama pull gemma3:27b
-echo "Ollama pulling 12b.."
+echo "${CYAN}Ollama pulling 12b..${END}"
 ollama pull gemma3:12b
 
-echo "Installing syncthing.."
+echo "${CYAN}Installing syncthing..${END}"
 sudo apt install syncthing
-echo "making config folders.."
+echo "${CYAN}making config folders..${END}"
 mkdir .config
 mkdir .config/systemd
 mkdir .config/systemd/user
 cd .config/systemd/user
 
 echo "
-------------
+${BLUE}------------${END}
 [Unit]
 Description=Syncthing - Open Source Continuous File Synchronization
 Documentation=man:syncthing(1)
@@ -50,7 +61,7 @@ NoNewPrivileges=true
 
 [Install]
 WantedBy=default.target
----------------------
+${BLUE}---------------------${END}
 "
 read -p "Copy the code.Start editing syncthing.service? (j/n)? " answer
 case ${answer:0:1} in
@@ -62,14 +73,24 @@ case ${answer:0:1} in
     ;;
 esac
 
-echo "Starting up syncthing.."
+echo "${CYAN}Starting up syncthing..${END}"
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 systemctl --user status syncthing.service
 
+read -p "Finished checking syncthing http://192.168.10.xxx:8384/ (j/n)? " answer
+case ${answer:0:1} in
+    j|J )
+        micro /home/bloc67/.config/syncthing/config.xml
+    ;;
+    * )
+        echo "Skipping.."
+    ;;
+esac
+
 systemctl --user stop syncthing.service
 systemctl --user disable syncthing.service
-echo "Stopped syncthing. Edit 127.0.0.1 to 0.0.0.0"
+echo "${YELLOW}Stopped syncthing. Edit 127.0.0.1 to 0.0.0.0${END}"
 read -p "Start editing syncthing config? (j/n)? " answer
 case ${answer:0:1} in
     j|J )
@@ -82,39 +103,22 @@ esac
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 
-echo "Go to http://192.168.10.xxx:8384/ for further synthing config."
-
 cd "/home/bloc67/Ollama"
-echo "Installing python.."
+echo "${CYAN}Installing python..${END}"
 sudo apt install python3.10-venv
 python3 -m venv env
 source env/bin/activate
-echo "Installing python bits.."
+echo "${CYAN}Installing python bits..${END}"
 pip install pydantic tqdm
-echo "Installing python langchain(older version).."
+echo "${CYAN}Installing python langchain(older version)..${END}"
 pip install 'langchain<0.3.27'
 pip install 'langchain_community<0.3.27'
 pip install 'langchain-ollama<0.3.27'
 
 # python translate.py test.srt -i English -o Norwegian -m "gemma3:27b"
-echo "Installing bashtop.."
+echo "${CYAN}Installing bashtop..${END}"
 sudo apt install bashtop
 
-cd /etc/netplan
-ls -la
-echo "
-network:
-  ethernets:
-    enp9s0:
-      addresses:
-      - 192.168.122.48/24
-      nameservers:
-        addresses:
-        - 8.8.8.8
-        - 8.8.4.4
-        search: []
-      routes:
-      - to: default
-        via: 192.168.122.1
-  version: 2
-"
+cd /home/bloc67/Ollama
+echo "${YELLOW}Running a first speed test...${END}"
+bash do_srt.sh
