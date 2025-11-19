@@ -543,7 +543,7 @@ class SubtitleTranslator:
             else:
                 # Process in batches with context
                 batches = self.processor.batch_subtitles(subtitles, batch_size)
-                print(f"Processing in {len(batches)} batches")
+                #print(f"Processing in {len(batches)} batches")
                 
                 for i, batch in enumerate(tqdm_asyncio(batches, desc="Translating batches")):
                     try:

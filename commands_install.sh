@@ -63,7 +63,7 @@ NoNewPrivileges=true
 WantedBy=default.target
 ${BLUE}---------------------${END}
 "
-read -p "Copy the code.Start editing syncthing.service? (j/n)? " answer
+read -p "Copy the code into a service? (j/n)? " answer
 case ${answer:0:1} in
     j|J )
         micro syncthing.service
@@ -73,15 +73,15 @@ case ${answer:0:1} in
     ;;
 esac
 
-echo "${CYAN}Starting up syncthing..${END}"
+echo "${CYAN}Starting up service..${END}"
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 systemctl --user status syncthing.service
 
-read -p "Finished checking syncthing http://192.168.10.xxx:8384/ (j/n)? " answer
+read -p "Editing syncthing to 0.0.0.0? (j/n)? " answer
 case ${answer:0:1} in
     j|J )
-        micro /home/bloc67/.config/syncthing/config.xml
+        echo "Fetching config..."
     ;;
     * )
         echo "Skipping.."
@@ -90,16 +90,9 @@ esac
 
 systemctl --user stop syncthing.service
 systemctl --user disable syncthing.service
-echo "${YELLOW}Stopped syncthing. Edit 127.0.0.1 to 0.0.0.0${END}"
-read -p "Start editing syncthing config? (j/n)? " answer
-case ${answer:0:1} in
-    j|J )
-        micro /home/bloc67/.config/syncthing/config.xml
-    ;;
-    * )
-        echo "Skipping.."
-    ;;
-esac
+wait
+micro /home/bloc67/.config/syncthing/config.xml
+
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
 
