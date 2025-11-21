@@ -12,15 +12,18 @@ ITALIC=$'\033[3m'
 UNDERLINE=$'\033[4m'
 
 echo "${YELLOW}**************${END}"
+find . -maxdepth 1 -type f -name '*.en.srt' -printf x | wc -c > total.txt
 
 COUNT=0
 SECONDS=0
 DATO_START=$(date '+%H:%M')
 for FIL in *.en.srt; do
-    python3 translate.py "$FIL" --skip-consistency -b 5 -m gemma3:12b
+    python3 translate.py "$FIL" --skip-consistency -b 5 -m gemma3:27b
     wait
     let "COUNT++"
     echo "${GREEN}Finished file ${COUNT}------------------------------------------------${END}"
+    echo "$COUNT" > count.txt
+    echo "$SECONDS" > seconds.txt
 done
 DATO_END=$(date '+%H:%M')
 duration=$SECONDS
