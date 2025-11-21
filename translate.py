@@ -339,7 +339,7 @@ DO NOT include the index number in your response.
 DO NOT use any prefixes like "Translation:" or "**" before the subtitle.
 
 When using the term "old bill", its meaning is the local police.
-DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
+DO NOT translate "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
 
 The words are being spoken in a cockney dialect East London. Consider that when translating.
 
@@ -424,7 +424,7 @@ Preserve the original meaning and formatting, but make the dialogue flow more na
 Do not change the subtitle index numbers in square brackets.
 
 When using the term "old bill", its meaning is the local police.
-DO NOT translate "Son", "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
+DO NOT translate "Gray", "Grey", "Phil", "Teen", "Bill" or "Whit". 
 
 The words are being spoken in a cockney dialect East London. Consider that when translating.
 

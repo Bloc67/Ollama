@@ -18,7 +18,7 @@ COUNT=0
 SECONDS=0
 DATO_START=$(date '+%H:%M')
 for FIL in *.en.srt; do
-    python3 translate.py "$FIL" --skip-consistency -b 5 -m gemma3:27b
+    python3 translate.py "$FIL" --skip-consistency -b 5 -m mdq100/Gemma3-Instruct-Abliterated:27b
     wait
     let "COUNT++"
     echo "${GREEN}Finished file ${COUNT}------------------------------------------------${END}"

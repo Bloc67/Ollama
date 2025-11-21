@@ -23,6 +23,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 systemctl status ollama
 echo "${CYAN}Ollama pulling 27b..${END}"
 ollama pull gemma3:27b
+ollama pull mdq100/Gemma3-Instruct-Abliterated:27b
 
 echo "${CYAN}Installing syncthing..${END}"
 sudo apt install syncthing
