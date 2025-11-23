@@ -77,7 +77,7 @@ esac
 echo "${CYAN}Starting up service..${END}"
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
-systemctl --user status syncthing.service
+systemctl --user status syncthing.service --no-pager
 
 read -p "Editing syncthing to 0.0.0.0? (j/n)? " answer
 case ${answer:0:1} in
@@ -91,12 +91,12 @@ esac
 
 systemctl --user stop syncthing.service
 systemctl --user disable syncthing.service
-wait
+wait 20
 micro /home/bloc67/.config/syncthing/config.xml
 
 systemctl --user enable syncthing.service
 systemctl --user start syncthing.service
-
+wait 20
 cd "/home/bloc67/Ollama"
 echo "${CYAN}Installing python..${END}"
 sudo apt install python3.10-venv
